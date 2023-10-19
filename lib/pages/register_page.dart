@@ -4,36 +4,56 @@ import 'package:minimal_social_ap/components/my_button.dart';
 import 'package:minimal_social_ap/components/text_fields.dart';
 import 'package:minimal_social_ap/helper/helper_function.dart';
 
-class LoginPage extends StatefulWidget {
-  //onTap method
+class RegisterPage extends StatefulWidget {
+  //ontap Method
   final void Function()? onTap;
-  LoginPage({super.key, this.onTap});
+
+  const RegisterPage({super.key, this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPwController = TextEditingController();
 
-  //login method
-  void login() async {
+  // register method
+  void RegisterUser() async {
+    //loading Circle
     showDialog(
       context: context,
       builder: (context) => const Center(
         child: CircularProgressIndicator(),
       ),
     );
-    //Login User
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
 
-      if (context.mounted) Navigator.of(context);
-    } on FirebaseAuthException catch (e) {
+    //make sure pass match
+    if (passwordController.text != confirmPwController.text) {
+      //pop oading circle
       Navigator.pop(context);
-      DisplayMessegeToUser(e.code, context);
+
+      //show error dialogue
+      DisplayMessegeToUser("Password don't match!", context);
+    }
+
+    //if password do not match
+    else {
+      try {
+        //try creating user
+        UserCredential? userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text);
+
+        Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        Navigator.pop(context);
+
+        //show messege
+        DisplayMessegeToUser(e.code, context);
+      }
     }
   }
 
@@ -66,6 +86,15 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 50,
               ),
+              //username
+              MyTextField(
+                hintText: 'User Name',
+                obsecureText: false,
+                controller: usernameController,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               //email field
               MyTextField(
                 hintText: 'Email',
@@ -80,6 +109,15 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: 'Password',
                 obsecureText: true,
                 controller: passwordController,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              //confirm passwrod
+              MyTextField(
+                hintText: 'Confirm Password',
+                obsecureText: true,
+                controller: confirmPwController,
               ),
               const SizedBox(
                 height: 10,
@@ -101,8 +139,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               //sign in button
               MyButton(
-                text: "Login",
-                onTap: login,
+                text: "Register",
+                onTap: RegisterUser,
               ),
               const SizedBox(
                 height: 25,
@@ -111,14 +149,14 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Don't have account?",
+                    "Already have an account?",
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.inversePrimary),
                   ),
                   GestureDetector(
                     onTap: widget.onTap,
                     child: const Text(
-                      " Register Here",
+                      " Login Here",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   )
