@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAm5MPVLjPKocUmyMXDM0FAa5IEh8DE8ls</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1002763732659</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.minimalSocialAp.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>minimal-social-app-782de</string>
+	<key>STORAGE_BUCKET</key>
+	<string>minimal-social-app-782de.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1002763732659:ios:597bda993adbdf2a3d92c6</string>
+</dict>
+</plist>
