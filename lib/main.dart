@@ -1,7 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:minimal_social_ap/auth/auth.dart';
+import 'package:minimal_social_ap/auth/login_or_register.dart';
 import 'package:minimal_social_ap/firebase_options.dart';
+import 'package:minimal_social_ap/pages/home_page.dart';
+import 'package:minimal_social_ap/pages/profile_page.dart';
+import 'package:minimal_social_ap/pages/users_page.dart';
 import 'package:minimal_social_ap/theme/dark_mode.dart';
 import 'package:minimal_social_ap/theme/light_mode.dart';
 
@@ -23,6 +27,12 @@ class MyApp extends StatelessWidget {
       home: const AuthPage(),
       theme: lightMode,
       darkTheme: darkmode,
+      routes: {
+        './login_register_page': (context) => const LoginOrRegister(),
+        './home_page': (context) => const HomePage(),
+        './profile_page': (context) => const MyProfile(),
+        './users_page': (context) => const UsersPage(),
+      },
     );
   }
 }
