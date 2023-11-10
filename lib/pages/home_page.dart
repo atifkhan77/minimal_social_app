@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:minimal_social_ap/components/my_drawer.dart';
+import 'package:minimal_social_ap/components/text_fields.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  final TextEditingController newPostController = TextEditingController();
 
   void logout() {
     FirebaseAuth.instance.signOut();
@@ -19,7 +21,15 @@ class HomePage extends StatelessWidget {
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
+      body: Column(
+        children: [
+          MyTextField(
+              hintText: 'Say Something...',
+              obsecureText: false,
+              controller: newPostController),
+        ],
+      ),
     );
   }
 }
